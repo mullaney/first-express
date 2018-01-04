@@ -24,8 +24,10 @@ app.get('/speak/:animal', function(req, res) {
 
 app.get('/repeat/:word/:times', function(req, res) {
   var response = '';
-  for (var count = 0; count < req.params.times; count++) {
-    response += req.params.word + " ";
+  var word = req.params.word;
+  var times = Number(req.params.times);
+  for (var count = 0; count < times; count++) {
+    response += word + " ";
   }
   res.send(response);
 });
