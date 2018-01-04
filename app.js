@@ -3,7 +3,12 @@ var app = express();
 var port = 3000;
 
 app.get('/', function(req, res) {
-  res.send('Hello world!');
+  res.render("home.ejs");
+});
+
+app.get('/picture/:tag', function(req, res) {
+  var tag = req.params.tag;
+  res.render('picture.ejs', { tag: tag });
 });
 
 app.get('/speak/:animal', function(req, res) {
