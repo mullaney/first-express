@@ -6,6 +6,15 @@ app.get('/', function(req, res) {
   res.render("home.ejs");
 });
 
+app.get('/posts', function(req, res) {
+  var posts = [
+    {title: "My first post", author: 'Kevin'},
+    {title: "Another post", author: 'Kevin'},
+    {title: "Last post", author: 'Kevin'}
+  ];
+  res.render('posts.ejs', {posts: posts});
+});
+
 app.get('/picture/:tag', function(req, res) {
   var tag = req.params.tag;
   res.render('picture.ejs', { tag: tag });
