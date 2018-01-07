@@ -1,31 +1,35 @@
-var express = require('express');
-var app = express();
-var port = 3000;
+const express = require('express');
+const app = express();
+const port = 3000;
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-app.get('/', function(req, res) {
-  res.render("home.ejs");
+app.get('/', (req, res) => {
+  res.render("home");
 });
 
-app.get('/posts', function(req, res) {
-  var posts = [
+app.get('/routes', (req, res) => {
+  res.send(app._router.stack);
+});
+
+app.get('/posts', (req, res) => {
+  const posts = [
     {title: "My first post", author: 'Kevin'},
     {title: "Another post", author: 'Kevin'},
     {title: "Last post", author: 'Kevin'}
   ];
-  res.render('posts.ejs', {posts: posts});
+  res.render('posts', {posts: posts});
 });
 
-app.get('/picture/:tag', function(req, res) {
-  var tag = req.params.tag;
-  res.render('picture.ejs', { tag: tag });
+app.get('/picture/:tag', (req, res) => {
+  const tag = req.params.tag;
+  res.render('picture', { tag: tag });
 });
 
-app.get('/speak/:animal', function(req, res) {
-  var animal = req.params.animal.toLowerCase();
-  var sounds = {
+app.get('/speak/:animal', (req, res) => {
+  const animal = req.params.animal.toLowerCase();
+  const sounds = {
     pig: 'Oink',
     cow: 'Moo',
     dog: 'Wolf', 
@@ -39,21 +43,21 @@ app.get('/speak/:animal', function(req, res) {
   }
 });
 
-app.get('/repeat/:word/:times', function(req, res) {
-  var response = '';
-  var word = req.params.word;
-  var times = Number(req.params.times);
-  for (var count = 0; count < times; count++) {
+app.get('/repeat/:word/:times', (req, res) => {
+  let response = '';
+  const word = req.params.word;
+  let times = Number(req.params.times);
+  for (let count = 0; count < times; count++) {
     response += word + " ";
   }
   res.send(response);
 });
 
-app.get('/page/:myPage', function(req, res) {
+app.get('/page/:myPage', (req, res) => {
   res.send('Welcome to page: ' + req.params.myPage);
 })
 
-app.get('*', function(req, res) {
+app.get('*', (req, res) => {
   res.status(404);
   res.send('Route not found: ' + req.url);
 });
