@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Show me a picture of: <%= tag %></title>
-</head>
-<body>
-  <h1>Show me a picture of: <%= tag %></h1>
+<% include partials/header %>
   <% if (tag === "dog") { %>
     <h2>Yes! Let's get a dog picture!</h2>
   <% } %>
-  <img src="https://loremflickr.com/600/400/<%= tag %>" alt="">  
-</body>
-</html>
+  <img src="https://loremflickr.com/600/400/<%= tag %>" alt="">
+<% include partials/footer %>

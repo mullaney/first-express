@@ -6,7 +6,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
-  res.render("home");
+  res.render("home", { title: 'Home' });
 });
 
 app.get('/routes', (req, res) => {
@@ -19,12 +19,12 @@ app.get('/posts', (req, res) => {
     {title: "Another post", author: 'Kevin'},
     {title: "Last post", author: 'Kevin'}
   ];
-  res.render('posts', {posts: posts});
+  res.render('posts', { posts: posts, title: 'Posts' });
 });
 
 app.get('/picture/:tag', (req, res) => {
   const tag = req.params.tag;
-  res.render('picture', { tag: tag });
+  res.render('picture', { tag: tag, title: `Picture with tag: ${tag}` });
 });
 
 app.get('/speak/:animal', (req, res) => {
@@ -32,7 +32,7 @@ app.get('/speak/:animal', (req, res) => {
   const sounds = {
     pig: 'Oink',
     cow: 'Moo',
-    dog: 'Wolf', 
+    dog: 'Wolf',
     cat: 'Meow'
   }
   if (sounds[animal] === undefined) {
